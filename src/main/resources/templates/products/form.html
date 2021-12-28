@@ -26,7 +26,7 @@
 				<br>
 				
 				<label for="price"><strong>Price</strong></label>
-				<input th:field="*{price}" type="number" step="100" min="0">
+				<input th:field="*{price}" type="number">
 				<span th:errors="*{price}"></span>
 				<br>
 				
@@ -38,12 +38,13 @@
 				<label for="image"><strong>Image</strong></label>
 				<input type="file" name="imageFile" id="imageFile"> <br>
 				<img th:if="${product.image != null && product.image != ''}"
-					 th:src="${'data:image/jpeg;base64,'+product.image}">
+					 th:src="${'data:image/jpeg;base64,'+product.image}"
+					 height="150px">
 				<br>
 			 </div>
 			<div class="btn-container">
-		            <button type="reset">Effacer</button>
 		            <button type="submit" id="submit">Valider</button>
+		            <button type="reset">Effacer</button>
 		    </div>
 		</div>
 	</form>
