@@ -6,16 +6,25 @@
 	<title>Category From</title>
 </head>
 <body>
-	<div th:if="${message}" style="color: red; display: block;" th:text="${message}"></div>
 	<form th:action="@{/categories/save}" method="post" th:object="${category}">
-		<input th:field="*{id}" type="hidden">
-		Name : <input th:field="*{name}"> <br>
-		<span th:errors="*{name}" style="color: red;"></span>
-		<br><hr>
-		Description : <textarea th:field="*{description}"></textarea> <br>
-		<span th:errors="*{description}" style="color: red;"></span>
-		<br><hr>
-		<input type="Submit">
+		<h1>Category Form</h1>
+		<div class="formcontainer">
+			<div th:if="${message}" style="color: red; display: block;" th:text="${message}"></div>
+			<div class="container">
+				<input th:field="*{id}" type="hidden">
+				<label for="name"><strong>Name</strong></label>
+				<input th:field="*{name}">
+				<span th:errors="*{name}"></span>
+				<br><br>
+				<label for="description"><strong>Description</strong></label>
+				<textarea th:field="*{description}"></textarea>
+				<span th:errors="*{description}" ></span>
+			</div>
+			<div class="btn-container">
+		        <button type="submit" id="submit">Valider</button>
+		    	<button type="reset">Effacer</button>
+		    </div>
+		</div>
 	</form>
 </body>
 </html>

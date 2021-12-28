@@ -12,7 +12,11 @@ form {
     min-width: 500px;
 }
 
-input, select, option{
+textarea{
+	resize: vertical;
+}
+
+input, select, option, textarea{
     width: 100%;
     padding: 8px 8px;
     margin: 8px 0;
@@ -20,6 +24,11 @@ input, select, option{
     border: 1px solid #ccc;
     box-sizing: border-box;
     font-size: 15px;
+}
+
+span{
+	display: inline-block;
+	color: red;
 }
 
 button {
