@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Product Form</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/style.css">
+	<title>Product Form</title>
 </head>
 <body>
-
+	<div th:if="${message}" style="color: red; display: block;" th:text="${message}"></div>
+	<form th:action="@{/products/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+		<div class="formcontainer">
+			<div class="container">
+				<input th:field="*{id}" type="hidden">
+				<input th:field="*{image}" type="hidden">
+				Name : <input th:field="*{name}"> <br>
+				<span th:errors="*{name}" style="color: red;"></span>
+				<br><hr>
+				Category : 	<select th:field="*{category}">
+		                  		<option th:each="category:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+		                  	</select>
+				<br><hr>
+				Price : <input th:field="*{price}" type="number"> <br>
+				<span th:errors="*{price}" style="color: red;"></span>
+				<br><hr>
+				Description : <textarea th:field="*{description}"></textarea> <br>
+				<span th:errors="*{description}" style="color: red;"></span>
+				<br><hr>
+				Image : <input type="file" name="imageFile" id="imageFile"> <br>
+				<img th:if="*{image}" th:src="${'data:image/jpeg;base64,'+product.image}">
+				<br><hr>
+			 </div>
+			<div class="btn-container">
+		            <button type="reset">Effacer</button>
+		            <button type="submit" id="submit">Valider</button>
+		    </div>
+		</div>
+	</form>
 </body>
 </html>

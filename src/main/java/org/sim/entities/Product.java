@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -34,9 +35,13 @@ public class Product implements Serializable{
 	@Lob
 	private String image;
 	
-	@Size(min = 10)
+	@Min(10)
 	private double price;
 	
 	@ManyToOne
 	private Category category;
+	
+	public String toString() {
+		return id+"-"+name;
+	}
 }

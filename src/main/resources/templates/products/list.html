@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/style.css">
 	<title>Products List</title>
 </head>
 <body>
-	<img alt="" th:src="${'data:image/jpeg;base64,'+product.image}">
+	<div th:if="${message}" style="color: red; display: block;" th:text="${message}"></div>
+	<table border="2">
+		<thead>
+			<tr>
+				<th>Product ID</th>
+				<th>Product Image</th>
+				<th>Product Name</th>
+				<th>Product Category</th>
+				<th>Product Description</th>
+				<th>Product Price </th>
+				<th>Actions</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product:${products}">
+				<td th:text="${product.id}"></td>
+				<td><img th:src="${'data:image/jpeg;base64,'+product.image}" height="75px"></td>
+				<td th:text="${product.name}"></td>
+				<td th:text="${product.category.name}"></td>
+				<td th:text="${product.description}"></td>
+				<td th:text="${product.price}"></td>
+				<td>
+					<a th:href="${'/products/update/'+product.id}">Modify</a>
+					<a th:href="${'/products/delete/'+product.id}" onclick="return confirm('Are sure about that ?')">Delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/products/add">Add new product</a>
 </body>
 </html>
