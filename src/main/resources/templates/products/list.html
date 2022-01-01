@@ -2,38 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/style.css">
+	<link th:replace="fragments :: head">
 	<title>Products List</title>
 </head>
 <body>
+	<div th:replace="fragments :: navbar"></div>
 	<div th:if="${message}" style="color: red; display: block;" th:text="${message}"></div>
-	<table border="2">
-		<thead>
-			<tr>
-				<th>Product ID</th>
-				<th>Product Image</th>
-				<th>Product Name</th>
-				<th>Product Category</th>
-				<th>Product Description</th>
-				<th>Product Price </th>
-				<th>Actions</th>				
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="product:${products}">
-				<td th:text="${product.id}"></td>
-				<td><img th:src="${'data:image/jpeg;base64,'+product.image}" height="75px"></td>
-				<td th:text="${product.name}"></td>
-				<td th:text="${product.category.name}"></td>
-				<td th:text="${product.description}"></td>
-				<td th:text="${product.price}"></td>
-				<td>
-					<a th:href="${'/products/update/'+product.id}">Modify</a>
-					<a th:href="${'/products/delete/'+product.id}" onclick="return confirm('Are sure about that ?')">Delete</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<a href="/products/add">Add new product</a>
+	<div class="table-container">
+		<table>
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Product Image</th>
+					<th>Product Name</th>
+					<th>Product Category</th>
+					<th>Product Description</th>
+					<th>Product Price </th>
+					<th>Actions</th>				
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="product:${products}">
+					<td th:text="${product.id}"></td>
+					<td><img th:src="${'data:image/jpeg;base64,'+product.image}" height="75px"></td>
+					<td th:text="${product.name}"></td>
+					<td th:text="${product.category.name}"></td>
+					<td th:text="${product.description}"></td>
+					<td th:text="${product.price}"></td>
+					<td>
+						<a th:href="${'/products/update/'+product.id}">
+							<img src="/img/edit.png" height="40px" alt="Edit" title="Edit This Product">
+						</a>
+						<a th:href="${'/products/delete/'+product.id}" onclick="return confirm('Are sure about that ?')">
+							<img src="/img/delete.png" height="40px" alt="Delete" title="Delete This Product">
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<a href="/products/add">
+		<img src="/img/add.png" height="40px" alt="Add" title="Add New Product">
+	</a>
+	<div th:replace="fragments :: footer"></div>
 </body>
 </html>

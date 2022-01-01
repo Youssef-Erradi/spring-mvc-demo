@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<link th:replace="fragments :: head">
 	<title>Home Page</title>
 </head>
 <body>
-
+	<div th:replace="fragments :: navbar"></div>
+	<div th:replace="fragments :: footer"></div>
 </body>
 </html>

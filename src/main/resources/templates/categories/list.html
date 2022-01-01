@@ -2,34 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/style.css">
+	<link th:replace="fragments :: head">
 	<title>Category List</title>
 </head>
 <body>
+	<div th:replace="fragments :: navbar"></div>
 	<div th:if="${message}" style="color: red; display: block;" th:text="${message}"></div>
-	<table border="2">
-		<thead>
-			<tr>
-				<th>Category ID</th>
-				<th>Category Name</th>
-				<th>Category Description</th>
-				<th>Category Products</th>
-				<th>Actions</th>				
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="category:${categories}">
-				<td th:text="${category.id}"></td>
-				<td th:text="${category.name}"></td>
-				<td th:text="${category.description}"></td>
-				<td th:text="${category.products.size}"></td>
-				<td>
-					<a th:href="${'/categories/update/'+category.id}">Modify</a>
-					<a th:href="${'/categories/delete/'+category.id}" onclick="return confirm('Are sure about that ?')">Delete</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<a href="/categories/add">Add new Category</a>
+	<div class="table-container">
+		<table>
+			<thead>
+				<tr>
+					<th>Category ID</th>
+					<th>Category Name</th>
+					<th>Category Description</th>
+					<th>Category Product Count</th>
+					<th>Actions</th>				
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="category:${categories}">
+					<td th:text="${category.id}"></td>
+					<td th:text="${category.name}"></td>
+					<td th:text="${category.description}"></td>
+					<td th:text="${category.products.size}"></td>
+					<td>
+						<a th:href="${'/categories/update/'+category.id}">
+							<img src="/img/edit.png" height="40px" alt="Edit" title="Edit This Category">
+						</a>
+						<a th:href="${'/categories/delete/'+category.id}" onclick="return confirm('Are sure about that ?')">
+							<img src="/img/delete.png" height="40px" alt="Delete" title="Delete This Category">
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<a href="/categories/add">
+		<img src="/img/add.png" height="40px" alt="Add" title="Add New Category">
+	</a>
+	<div th:replace="fragments :: footer"></div>
 </body>
 </html>

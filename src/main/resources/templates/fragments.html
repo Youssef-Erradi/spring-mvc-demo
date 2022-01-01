@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+	
+	<th:block th:fragment="head">
+		<link href="/img/list.png" rel="icon">
+		<link rel="stylesheet" href="/style.css">
+	</th:block>
+	
+	<div th:fragment="navbar" class="navbar">
+		<ul>
+			<li><a href="/">Home Page</a></li>
+			<li><a href="/products">Products</a></li>
+			<li><a href="/categories">Categories</a></li>
+		</ul>
+	</div>
+	<div th:fragment="footer" class="footer">
+		Spring MVC Demo Application Created By Erradi Youssef & Neddam Mohamed
+	</div>
+</body>
+</html>

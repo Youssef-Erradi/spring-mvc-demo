@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/style.css">
+	<link th:replace="fragments :: head">
 	<title>Category From</title>
 </head>
 <body>
+	<div th:replace="fragments :: navbar"></div>
 	<form th:action="@{/categories/save}" method="post" th:object="${category}">
 		<h1>Category Form</h1>
 		<div class="formcontainer">
@@ -26,5 +27,6 @@
 		    </div>
 		</div>
 	</form>
+	<div th:replace="fragments :: footer"></div>
 </body>
 </html>

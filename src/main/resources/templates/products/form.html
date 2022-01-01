@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/style.css">
+	<link th:replace="fragments :: head">
 	<title>Product Form</title>
 </head>
 <body>
+	<div th:replace="fragments :: navbar"></div>
 	<form th:action="@{/products/save}" th:object="${product}" method="post" enctype="multipart/form-data">
 		<h1>Product Form</h1>
 		<div class="formcontainer">
