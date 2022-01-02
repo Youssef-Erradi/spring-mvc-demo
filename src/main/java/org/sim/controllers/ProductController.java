@@ -1,6 +1,7 @@
 package org.sim.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,8 +29,15 @@ public class ProductController {
 	private final String folderName = "products";
 	
 	@GetMapping("")
-	public String index(Model model) {
-		model.addAttribute("products", repository.findAll());
+	public String index(@RequestParam(defaultValue = "") String description,
+						@RequestParam(defaultValue = "") String name,
+						@RequestParam(defaultValue = "0") double min,
+						@RequestParam(defaultValue = Double.MAX_VALUE+"") double max,
+						Model model) {
+		List<Product> products = repository.findByDescriptionContaining(description);
+		products.retainAll(repository.findByNameContaining(name));
+		products.retainAll(repository.findByPriceBetween(min, max));
+		model.addAttribute("products", products);
 		return folderName+"/list";
 	}
 	

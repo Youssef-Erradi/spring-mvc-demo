@@ -1,5 +1,7 @@
 package org.sim.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.sim.dao.CategoryRepository;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -21,8 +24,11 @@ public class CategoryController {
 	private final String folderName = "categories";
 	
 	@GetMapping("")
-	public String index(Model model) {
-		model.addAttribute("categories", repository.findAll());
+	public String index(@RequestParam(defaultValue = "") String description,
+						@RequestParam(defaultValue = "") String name, Model model) {
+		List<Category> categories = repository.findByDescriptionContaining(description);
+		categories.retainAll(repository.findByNameContaining(name));
+		model.addAttribute("categories",categories);
 		return folderName+"/list";
 	}
 	
@@ -43,7 +49,8 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/save")
-	public String save(@Valid Category category, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+	public String save(@Valid Category category, BindingResult bindingResult,
+						Model model,RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("message", "There is some errors during validation");
 			model.addAttribute("category", category);
