@@ -14,11 +14,11 @@
 			<div class="container">
 				<input th:field="*{id}" type="hidden">
 				<label for="name"><strong>Name</strong></label>
-				<input th:field="*{name}">
-				<span th:errors="*{name}"></span>
+				<input th:field="*{name}" required>
+				<span th:errors="*{name}" required></span>
 				<br><br>
 				<label for="description"><strong>Description</strong></label>
-				<textarea th:field="*{description}"></textarea>
+				<textarea th:field="*{description}" required></textarea>
 				<span th:errors="*{description}" ></span>
 			</div>
 			<div class="btn-container">

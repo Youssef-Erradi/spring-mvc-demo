@@ -16,23 +16,23 @@
 				<input th:field="*{image}" type="hidden">
 				
 				<label for="name"><strong>Name</strong></label>
-				<input th:field="*{name}">
+				<input th:field="*{name}" required>
 				<span th:errors="*{name}"></span>
 				<br>
 				
 				<label for="category"><strong>Category</strong></label>
-				<select th:field="*{category}">
+				<select th:field="*{category}" required>
                		<option th:each="category:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                	</select>
 				<br>
 				
 				<label for="price"><strong>Price</strong></label>
-				<input th:field="*{price}" type="number">
+				<input th:field="*{price}" type="number" required>
 				<span th:errors="*{price}"></span>
 				<br>
 				
 				<label for="description"><strong>Description</strong></label>
-				<textarea th:field="*{description}"></textarea>
+				<textarea th:field="*{description}" required></textarea>
 				<span th:errors="*{description}"></span>
 				<br>
 				
